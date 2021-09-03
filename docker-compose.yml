@@ -1,0 +1,7 @@
+version: "3"
+services:
+  vc-notf:
+    build: .
+    env_file:
+      - .env
+    restart: always
