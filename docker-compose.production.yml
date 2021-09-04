@@ -1,0 +1,7 @@
+version: "3"
+services:
+  vc-notf:
+    image: ghcr.io/cordx56/vc-notf:main
+    env_file:
+      - .env
+    restart: always

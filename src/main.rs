@@ -1,14 +1,10 @@
 use serenity::async_trait;
-use serenity::builder::CreateMessage;
 use serenity::client::{Client, Context, EventHandler};
-use serenity::framework::standard::{
-    macros::{command, group},
-    CommandResult, StandardFramework,
-};
+use serenity::framework::standard::StandardFramework;
 use serenity::model::{
-    channel::{Channel, ChannelType, Embed, GuildChannel, Message},
+    channel::{Channel, ChannelType, GuildChannel},
     gateway::Ready,
-    id::{ChannelId, GuildId},
+    id::GuildId,
     interactions::{
         application_command::{
             ApplicationCommand, ApplicationCommandInteractionDataOptionValue,
@@ -136,8 +132,8 @@ impl EventHandler for Handler {
         }
     }
 
-    async fn ready(&self, ctx: Context, ready: Ready) {
-        let commands = ApplicationCommand::set_global_application_commands(&ctx, |commands| {
+    async fn ready(&self, ctx: Context, _ready: Ready) {
+        let _commands = ApplicationCommand::set_global_application_commands(&ctx, |commands| {
             commands.create_application_command(|command| {
                 command
                     .name("members")
