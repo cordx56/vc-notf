@@ -57,26 +57,28 @@ impl EventHandler for Handler {
                                 if let Some(new_channel_id) = new_vs.channel_id {
                                     if let Some(new_channel_name) = new_channel_id.name(&ctx).await
                                     {
-                                        for notf_channel in notf_channels {
-                                            notf_channel
-                                                .send_message(&ctx, |m| {
-                                                    m.add_embed(|e| {
-                                                        e.title(format!(
-                                                            "{} moved VC!",
-                                                            member_display_name
-                                                        ))
-                                                        .description(format!(
-                                                            "<@{}> moved from {} to {}!",
-                                                            member_user_id,
-                                                            old_channel_name,
-                                                            new_channel_name,
-                                                        ))
-                                                        .color(Color::from_rgb(23, 162, 184))
-                                                        .thumbnail(&member_avatar_url)
+                                        if old_channel_id != new_channel_id {
+                                            for notf_channel in notf_channels {
+                                                notf_channel
+                                                    .send_message(&ctx, |m| {
+                                                        m.add_embed(|e| {
+                                                            e.title(format!(
+                                                                "{} moved VC!",
+                                                                member_display_name
+                                                            ))
+                                                            .description(format!(
+                                                                "<@{}> moved from {} to {}!",
+                                                                member_user_id,
+                                                                old_channel_name,
+                                                                new_channel_name,
+                                                            ))
+                                                            .color(Color::from_rgb(23, 162, 184))
+                                                            .thumbnail(&member_avatar_url)
+                                                        })
                                                     })
-                                                })
-                                                .await
-                                                .ok();
+                                                    .await
+                                                    .ok();
+                                            }
                                         }
                                     }
                                 } else {
