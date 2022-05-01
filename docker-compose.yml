@@ -2,6 +2,7 @@ version: "3"
 services:
   vc-notf:
     build: .
+    command: /bin/bash -c "sqlx migrate run && vc-notf"
     env_file:
       - .env
     restart: always
