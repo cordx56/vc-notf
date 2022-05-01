@@ -5,3 +5,10 @@ services:
     env_file:
       - .env
     restart: always
+  db:
+    image: postgres:14
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    restart: always
